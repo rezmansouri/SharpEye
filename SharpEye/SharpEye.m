@@ -77,9 +77,9 @@ classdef SharpEye
             figure;
             imshow(pic);
             if y == 1
-                title('this person is wearing a mask');
+                title('wearing a mask');
             else
-                title('this person is NOT wearing a mask');
+                title('NOT wearing a mask');
             end
         end
 %%

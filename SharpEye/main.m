@@ -7,7 +7,6 @@ x_train_original = eye.read_h5_correctly('../datasets/train_maskvnomask.h5', '/t
 y_train_original = eye.read_h5_correctly('../datasets/train_maskvnomask.h5', '/train_set_y');
 x_test_original = eye.read_h5_correctly('../datasets/test_maskvnomask.h5', '/test_set_x');
 y_test_original = eye.read_h5_correctly('../datasets/test_maskvnomask.h5', '/test_set_y');
-list_classes = eye.read_h5_correctly('../datasets/test_maskvnomask.h5', '/list_classes');
 
 x_train_original_size = size(x_train_original);
 x_test_original_size = size(x_test_original);
