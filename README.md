@@ -1,5 +1,9 @@
-# SharpEye
+# SharpEye 🧿
 SharpEye is a collection of MATLAB functions for the logistic regression algorithm and its application has been implemented for binary image classification.
+<p align="center">
+  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/header.png"/>
+  </br>
+</p>
 
 This project trains a logistic regression model as an example, to predict if the person in a picture (such as _Elon Musk!_) is wearing a mask (_musk!_) or not. 
 
