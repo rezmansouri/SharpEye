@@ -35,5 +35,5 @@ fprintf('train accuracy: %f\n', train_acc);
 test_acc = eye.predict(final_weights, final_bias, x_test, y_test);
 fprintf('test accuracy: %f\n', test_acc);
 
-eye.tell('images/elon-with-mask.jpg', final_weights, final_bias, num_px);
-eye.tell('images/elon-without-mask.jpg', final_weights, final_bias, num_px);
+eye.tell('../images/elon-with-mask.jpg', final_weights, final_bias, num_px);
+eye.tell('../images/elon-without-mask.jpg', final_weights, final_bias, num_px);
