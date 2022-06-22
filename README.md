@@ -139,11 +139,11 @@ Here I create the required variables for the model to be generated. In `get_init
 model_dimension = [num_px * num_px * 3, 1];
 [weights, bias] = eye.get_initial_parameters(model_dimension);
 ```
-Now the model is ready to be generated an optimized.
+Now the model is ready to be generated and trained.
 ```
 [final_weights, final_bias, costs] = eye.optimize(weights, bias, x_train, y_train, 1000, 0.001);
 ```
-The last two arguments are the number of iterations (epochs) and the learinig rate, respectively.
+The last two arguments are the number of iterations (epochs) and the learninig rate, respectively.
 
 Now that the model is ready, it's time to see how it did.
 ```
@@ -182,7 +182,7 @@ eye.tell('../images/elon-without-mask.jpg', final_weights, final_bias, num_px);
 Looks like elon can be caught if he is not wearing his _Musk!_
 
 ## SharpEye Functions
-This sections explains the implementation of the functions used in the scenario above.
+This sections explains the implementation of the functions used in the scenario above. The functions are in [this](https://github.com/rezmansouri/SharpEye/blob/main/SharpEye/SharpEye.m) file.
 1. ### read_h5_correctly
 
 In this function, first using the default h5d5 MATLAB package, the dataset is read. Then, using `permute` it is turned back to its original demensions (_detranspose!_)
