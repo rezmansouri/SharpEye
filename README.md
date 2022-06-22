@@ -58,7 +58,7 @@ Pass _Z_ to the sigmoid function. Let's call the output _A_ (activations). It ca
   <i>Non-Linear Part of Forward Prop.</i>
 </p>
 
-Figure 4 describes the model and forward prop.
+Figure 3 describes the model and forward prop.
 <p align="center">
   <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/figures/fig3.png"/>
   </br>
