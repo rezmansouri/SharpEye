@@ -75,16 +75,16 @@ In backward propagation, we calculate the logistic cost of our predictions, acco
 
 Where **m** is the number of input samples, in our case, 1000. _Note that the operator <b>*</b> is element-wise multiplication._
 
-After calculating this value, the derivatives of _W_ and _b_ with respect to the cost, (_J_) are calculated. We'll call them _dW_ and _db_.
+After calculating this value, the derivatives of the cost, (_J_), with respect to _W_ and _b_  are calculated. We'll call them _dW_ and _db_.
 <p align="center">
-  <img src="https://latex.codecogs.com/svg.image?dW&space;=&space;\frac{1}{m}X&space;*&space;(A&space;-&space;Y)^{T}"/>
+  <img src="https://latex.codecogs.com/svg.image?\frac{\partial&space;J}{\partial&space;W}&space;=&space;dW&space;=&space;\frac{1}{m}&space;X&space;*&space;(A-Y)^{T}"/>
   </br>
-  <i>Derivative of W with respect to the Logistic Cost - a vector with the same dimensions as W</i>
+  <i>Derivative of J, the Logistic Cost, with respect to W - a vector with the same dimensions as W</i>
 </p>
 <p align="center">
-  <img src="https://latex.codecogs.com/svg.image?db&space;=&space;\frac{1}{m}\sum&space;(A&space;-&space;Y)"/>
+  <img src="https://latex.codecogs.com/svg.image?\frac{\partial&space;J}{\partial&space;b}&space;=&space;db&space;=&space;\frac{1}{m}\sum(A-Y)"/>
   </br>
-  <i>Derivative of b with respect to the Logistic Cost - a single real number, just like b</i>
+  <i>Derivative of J, the Logistic Cost, with respect to b - a single real number, just like b</i>
 </p>
 
 Note that although the dimensions of _X_ and _(A - Y)_<sup><i>T</i></sup> do not match, the element-wise product is caluclatable through repeating the multiplication of _(A - Y)_<sup><i>T</i></sup> on each column of _X_. This is referred to as _Broadcasting_ in python's numpy. You can read more [here](https://numpy.org/doc/stable/user/basics.broadcasting.html).
@@ -229,7 +229,7 @@ function cost = compute_cost(activations, y, m)
 end
 ```
 6. ### backward_propagation
-Calculating the derivatives of _W_ and _b_ with respect to the cost, _J_.
+Calculating the derivatives of the cost _J_ with respect to _W_ and _b_.
 ```
 function [dw, db] = backward_propagation(x, y, activations, m)
             dw = x * (activations - y)' / m;
