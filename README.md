@@ -45,7 +45,7 @@ The forward propagation, calculates the model's predictions on the input data. T
 ##### Linear Forward Prop.
 The linear part is to calculate the dot product of _W_<sup><i>T</i></sup> and _X_ plus _b_. Let's call this _Z_. The elements in _Z_ could be too large or too small, making it difficult to map these values for a prediction scale on say, 0 to 1. Thus, the Non-Linear part is required which is the heart of this model, ***Logistic Regression***!
 <p align="center">
-  <img src="https://latex.codecogs.com/svg.image?Z&space;=&space;X&space;\bullet&space;W^{T}&space;&plus;&space;b"/>
+  <img src="https://latex.codecogs.com/svg.image?Z&space;=&space;W^{T}&space;\bullet&space;X&space;&plus;&space;b"/>
   </br>
   <i>Linear Part of Forward Prop.</i>
 </p>
