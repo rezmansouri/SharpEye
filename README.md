@@ -87,9 +87,9 @@ After calculating this value, the derivatives of _W_ and _b_ with respect to the
   <i>Derivative of b with respect to the Logistic Cost - a single real number, just like b</i>
 </p>
 
-Note that although the dimensions of _X_ and _(A - Y)_<sup><i>T</i></sup> do not match, the element-wise product is caluclatable through repeating the multiplication of _(A - Y)_<sup><i>T</i></sup> on each column of _X_. This is referred to _Broadcasting_ in the python's numpy. You can read more [here](https://numpy.org/doc/stable/user/basics.broadcasting.html).
+Note that although the dimensions of _X_ and _(A - Y)_<sup><i>T</i></sup> do not match, the element-wise product is caluclatable through repeating the multiplication of _(A - Y)_<sup><i>T</i></sup> on each column of _X_. This is referred to as _Broadcasting_ in python's numpy. You can read more [here](https://numpy.org/doc/stable/user/basics.broadcasting.html).
 
-Now that we have _dW_ and _db_, we perform on operation of gradient descent. Using the learning rate hyperparameter (_a_) of something like 0.01, _W_ and _b_ will change their values:
+Now that we have _dW_ and _db_, we perform an operation of gradient descent. Using the learning rate hyperparameter (_a_) of something like 0.01, _W_ and _b_ will change their values:
 - _W = W - a * dW_
 - _b = b - a * db_
 
