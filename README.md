@@ -45,7 +45,7 @@ The forward propagation, calculates the model's predictions on the input data. T
 ##### Linear Forward Prop.
 The linear part is to calculate the dot product of _W_<sup><i>T</i></sup> and _X_ plus _b_. Let's call this _Z_. The elements in _Z_ could be too large or too small, making it difficult to map these values for a prediction scale on say, 0 to 1. Thus, the Non-Linear part is required which is the heart of this model, ***Logistic Regression***!
 <p align="center">
-  <img src="https://latex.codecogs.com/svg.image?Z&space;=&space;X&space;\bullet&space;W^{T}&space;&plus;&space;b"/>
+  <img src="https://latex.codecogs.com/svg.image?Z&space;=&space;W^{T}&space;\bullet&space;X&space;&plus;&space;b"/>
   </br>
   <i>Linear Part of Forward Prop.</i>
 </p>
@@ -87,9 +87,9 @@ After calculating this value, the derivatives of _W_ and _b_ with respect to the
   <i>Derivative of b with respect to the Logistic Cost - a single real number, just like b</i>
 </p>
 
-Note that although the dimensions of _X_ and _(A - Y)_<sup><i>T</i></sup> do not match, the element-wise product is caluclatable through repeating the multiplication of _(A - Y)_<sup><i>T</i></sup> on each column of _X_. This is referred to _Broadcasting_ in the python's numpy. You can read more [here](https://numpy.org/doc/stable/user/basics.broadcasting.html).
+Note that although the dimensions of _X_ and _(A - Y)_<sup><i>T</i></sup> do not match, the element-wise product is caluclatable through repeating the multiplication of _(A - Y)_<sup><i>T</i></sup> on each column of _X_. This is referred to as _Broadcasting_ in python's numpy. You can read more [here](https://numpy.org/doc/stable/user/basics.broadcasting.html).
 
-Now that we have _dW_ and _db_, we perform on operation of gradient descent. Using the learning rate hyperparameter (_a_) of something like 0.01, _W_ and _b_ will change their values:
+Now that we have _dW_ and _db_, we perform an operation of gradient descent. Using the learning rate hyperparameter (_a_) of something like 0.01, _W_ and _b_ will change their values:
 - _W = W - a * dW_
 - _b = b - a * db_
 
@@ -139,11 +139,11 @@ Here I create the required variables for the model to be generated. In `get_init
 model_dimension = [num_px * num_px * 3, 1];
 [weights, bias] = eye.get_initial_parameters(model_dimension);
 ```
-Now the model is ready to be generated an optimized.
+Now the model is ready to be generated and trained.
 ```
 [final_weights, final_bias, costs] = eye.optimize(weights, bias, x_train, y_train, 1000, 0.001);
 ```
-The last two arguments are the number of iterations (epochs) and the learinig rate, respectively.
+The last two arguments are the number of iterations (epochs) and the learninig rate, respectively.
 
 Now that the model is ready, it's time to see how it did.
 ```
@@ -182,7 +182,7 @@ eye.tell('../images/elon-without-mask.jpg', final_weights, final_bias, num_px);
 Looks like elon can be caught if he is not wearing his _Musk!_
 
 ## SharpEye Functions
-This sections explains the implementation of the functions used in the scenario above.
+This sections explains the implementation of the functions used in the scenario above. The functions are in [this](https://github.com/rezmansouri/SharpEye/blob/main/SharpEye/SharpEye.m) file.
 1. ### read_h5_correctly
 
 In this function, first using the default h5d5 MATLAB package, the dataset is read. Then, using `permute` it is turned back to its original demensions (_detranspose!_)
