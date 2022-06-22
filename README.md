@@ -68,7 +68,7 @@ Figure 3 describes the model and forward prop.
 #### Backward Propagation
 In backward propagation, we calculate the logistic cost of our predictions, according to their true labels _Y_ (also a 1 x 1000 vector). The formula for logistic cost is as follows:
 <p align="center">
-  <img src="https://latex.codecogs.com/svg.image?J&space;=&space;-\frac{1}{m}[(Y&space;*&space;log(A))&space;&plus;&space;((1-Y)&space;*&space;log(1-A))]"/>
+  <img src="https://latex.codecogs.com/svg.image?J&space;=&space;-\frac{1}{m}\sum[(Y&space;*&space;log(A))&space;&plus;&space;((1-Y)&space;*&space;log(1-A))]"/>
   </br>
   <i>Logistic Cost</i>
 </p>
