@@ -1,7 +1,7 @@
 # SharpEye 🧿
 SharpEye is a collection of MATLAB functions for the logistic regression algorithm and its application has been implemented for binary image classification.
 <p align="center">
-  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/header.png"/>
+  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/figures/header.png"/>
   </br>
 </p>
 
@@ -13,7 +13,7 @@ The datasets' raw pictures were gathered from [here](https://github.com/chandrik
 ### Logistic Regression
 This type of statistical model (also known as logit model) is often used for classification and predictive analytics. Logistic regression estimates the probability of an event occurring, such as voted or didn’t vote, based on a given dataset of independent variables. Since the outcome is a probability, the dependent variable is bounded between 0 and 1. In logistic regression, a logit transformation (sigmoid function) is applied on the odds—that is, the probability of success divided by the probability of failure.
 <p align="center">
-  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/fig1.png"/>
+  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/figures/fig1.png"/>
   </br>
   <i>Figure 1 - Logistic Regression</i>
   </br>
@@ -27,7 +27,7 @@ This type of statistical model (also known as logit model) is often used for cla
 ### Gradient Descent
 Gradient descent is an optimization algorithm used to minimize some function by iteratively moving in the direction of steepest descent as defined by the negative of the gradient. In machine learning, we use gradient descent to update the parameters of our model. If _w_ is a weight vector of our model, we subtract _dw_ times a learning rate _a_ from _w_ in each backpropagation. This means: _w = w - a * dw_.
 <p align="center">
-  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/fig2.png"/>
+  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/figures/fig2.png"/>
   </br>
   <i>Figure 2 - Gradient Descent</i>
 </p>
@@ -60,7 +60,7 @@ Pass _Z_ to the sigmoid function. Let's call the output _A_ (activations). It ca
 
 Figure 4 describes the model and forward prop.
 <p align="center">
-  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/fig3.png"/>
+  <img src="https://github.com/rezmansouri/SharpEye/blob/main/figures/fig3.png"/>
   </br>
   <i>Figure 3 - Our Model</i>
 </p>
@@ -161,7 +161,7 @@ test accuracy: 92.194093
 ```
 And the consecutive costs of training are also plotted:
 <p align="center">
-  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/fig4.jpg"/>
+  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/figures/fig4.jpg"/>
   </br>
   <i>Figure 4 - Plot of the costs</i>
 </p>
@@ -175,7 +175,7 @@ eye.tell('../images/elon-with-mask.jpg', final_weights, final_bias, num_px);
 eye.tell('../images/elon-without-mask.jpg', final_weights, final_bias, num_px);
 ```
 <p align="center">
-  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/fig5.png"/>
+  <img src="https://github.com/rezmansouri/SharpEye/blob/main/assets/figures/fig5.png"/>
   </br>
 </p>
 
