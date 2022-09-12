@@ -100,12 +100,12 @@ After repeating forward / backward propagation for a specific number of iteratio
 Here begins the MATLAB part of the story (_Yuck! MATLAB is so dumb_). This scenario is the `main.m` script which can be found [here](https://github.com/rezmansouri/SharpEye/blob/main/SharpEye/main.m). I will explain each section of it here.
 
 First we need to create an object of our _SharpEye_ function collection.
-```
+```matlab
 eye = SharpEye;
 ```
 
 Then we read our datasets. 
-```
+```matlab
 x_train_original = eye.read_h5_correctly('../datasets/train_maskvnomask.h5', '/train_set_x');
 y_train_original = eye.read_h5_correctly('../datasets/train_maskvnomask.h5', '/train_set_y');
 x_test_original = eye.read_h5_correctly('../datasets/test_maskvnomask.h5', '/test_set_x');
@@ -114,7 +114,7 @@ y_test_original = eye.read_h5_correctly('../datasets/test_maskvnomask.h5', '/tes
 It should be noted that MATLAB reads `.h5` files wrong and results in transposed values. Thus, I had to implement my own read function (`read_h5_correctly`) which I'll explain in the next section.
 
 After, I get the size of the train/test datasets to have their numbers of samples and picture dimensions. Although in the overview, our example had 64 x 64 pictures, the implementation allows training with dynamic model dimensions resulting from the dimensions of the input.
-```
+```matlab
 x_train_original_size = size(x_train_original);
 x_test_original_size = size(x_test_original);
 
@@ -123,30 +123,30 @@ m_test = x_test_original_size(1);
 num_px = x_train_original_size(2);
 ```
 Then, as explained in the overview, I flatten the datasets, while casting their type from int8 to double for the sake of computations.
-```
+```matlab
 x_train_flat = double(reshape(x_train_original, m_train, [], 1)');
 x_test_flat = double(reshape(x_test_original, m_test, [], 1)');
 y_train = double(y_train_original);
 y_test = double(y_test_original);
 ```
 Now it's time to normalize the input. RGB image pixel values is between 0 and 255. By dividing pixel values to 255, they will be normalized. This is a common practice among the computer vision communities.
-```
+```matlab
 x_train = x_train_flat / 255;
 x_test = x_test_flat / 255;
 ```
 Here I create the required variables for the model to be generated. In `get_initial_parameters` function, which I'll explain later, the weight/bias initialization is done.
-```
+```matlab
 model_dimension = [num_px * num_px * 3, 1];
 [weights, bias] = eye.get_initial_parameters(model_dimension);
 ```
 Now the model is ready to be generated and trained.
-```
+```matlab
 [final_weights, final_bias, costs] = eye.optimize(weights, bias, x_train, y_train, 1000, 0.001);
 ```
 The last two arguments are the number of iterations (epochs) and the learninig rate, respectively.
 
 Now that the model is ready, it's time to see how it did.
-```
+```matlab
 train_acc = eye.predict(final_weights, final_bias, x_train, y_train);
 fprintf('train accuracy: %f\n', train_acc);
 test_acc = eye.predict(final_weights, final_bias, x_test, y_test);
@@ -170,7 +170,7 @@ It can be seen that it keeps going down smoothely, so we are doing just right!
 Now you can give 64 * 64 (or whatever dimension your training/test dataset images have) to the _SharpEye_ model and let it spit out the prediction.
 
 In our case, we were trying to find if people are wearing masks or not. So let's see if our model can figure out if elon musk is wearing a _musk!_ or not.
-```
+```matlab
 eye.tell('../images/elon-with-mask.jpg', final_weights, final_bias, num_px);
 eye.tell('../images/elon-without-mask.jpg', final_weights, final_bias, num_px);
 ```
@@ -186,7 +186,7 @@ This sections explains the implementation of the functions used in the scenario 
 1. ### read_h5_correctly
 
 In this function, first using the default h5d5 MATLAB package, the dataset is read. Then, using `permute` it is turned back to its original demensions (_detranspose!_)
-```
+```matlab
 function data = read_h5_correctly(address, dataset_name)
             incorrect = h5read(address, dataset_name);
             ndim = numel(size(incorrect));
@@ -196,7 +196,7 @@ end
 2. ### get_initial_parameters
 
 First we set the range to 1 (equivalent for random.seed() in python's numpy). A common practice where you set the random seed to a constant so that with each execution, the same random numbers are generated as before. Then we initialize the weights with small values and the bias with zero. This is a newbie type of initialization. Normally you would want to initialize the parameters using a _He Initialization_ approach which leads to faster gradient descent convergance. But this does its job for us.
-```
+```matlab
 function [weights, bias] = get_initial_parameters(dimension)
             rng(1);
             weights = rand(dimension) * 0.01;
@@ -205,14 +205,14 @@ end
 ```
 3. ### sigmoid
 The default matlab R2015b does not have the sigmoid function, so I had to implement it myself.
-```
+```matlab
 function result = sigmoid(input)
             result = 1 ./ (1 + exp(-input));
 end
 ```
 4. ### forward_propagation
 We calculate the dot product of _W_<sup><i>T</i></sup> and _X_ plus _b_ and take the sigmoid of it, and return in as the _A_ vector.
-```
+```matlab
 function activations = forward_propagation(w, b, x)
             z = w' * x + b;
             activations = SharpEye.sigmoid(z);
@@ -220,7 +220,7 @@ end
 ```
 5. ### compute_cost
 Calculating the logistic cost function for one forward propagation.
-```
+```matlab
 function cost = compute_cost(activations, y, m)
             cost_part_one = y .* log(activations);
             cost_part_two = (1 - y) .* log(1 - activations);
@@ -230,7 +230,7 @@ end
 ```
 6. ### backward_propagation
 Calculating the derivatives of the cost _J_ with respect to _W_ and _b_.
-```
+```matlab
 function [dw, db] = backward_propagation(x, y, activations, m)
             dw = x * (activations - y)' / m;
             db = sum(activations - y) / m;
@@ -238,7 +238,7 @@ end
 ```
 7. ### optimize
 This is the function that repeats forward/back prop for `num_iterations` numbers. It uses the functions described above. At the end it plots the costs of training, prints the final cost, and returns the final_weights, final_biases and the costs.
-```
+```matlab
 function [final_weights, final_biases, costs] = optimize(w, b, x, y, num_iterations, learning_rate)
     costs = zeros([1, num_iterations]);
     x_size = size(x);
@@ -262,7 +262,7 @@ end
 ```
 8. ### predict
 This function performs forward prop on a set of inputs and checks with their true labels to calculate a accuracy index. It should be noted that where `y_hat(activations >= 0.5) = 1;` is done, an array of zero values with the size of `activations` is manuplated to contain ones where the corresponding elements in the `activations` array are more or equal to 0.5. Basically applying the threshold to _A_ in order to make _Y_<sub><i>hat</i></sub>.
-```
+```matlab
 function accuracy = predict(w, b, x, y)
             x_size = size(x);
             m = x_size(2);
@@ -275,7 +275,7 @@ end
 
 9. ### tell
 Creating _X_ from a single image (with matching dimensions with the training/test datasets) and performing one forward prop. to make predictions about that image.
-```
+```matlab
 function tell(picture_address, w, b, num_px)
     pic = imread(picture_address);
     pic_size = size(pic);
